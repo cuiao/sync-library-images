@@ -17,7 +17,7 @@ TMP_DIR="/tmp/docker-library"
 SCRIPTS_PATH=$(cd $(dirname "${BASH_SOURCE}") && pwd -P)
 UPSTREAM="https://github.com/docker-library/official-images"
 
-SKIP_TAG="windowsservercore"
+SKIP_TAG="NERVEREXISTS"
 
 cd ${REPO_PATH}
 mkdir -p ${TMP_DIR}
@@ -32,7 +32,7 @@ diff_images() {
     : ${LAST_TAG:=$(git log upstream/master --format='%H' | tail -n1)}
     IMAGES=$(git diff --name-only --ignore-space-at-eol --ignore-space-change \
     --diff-filter=AM ${LAST_TAG} ${CURRENT_COMMIT} library | xargs -L1 -I {} sed "s|^|{}:|g" {} \
-    # | sed -n "s| ||g;s|library/||g;s|:Tags:|:|p;s|:SharedTags:|:|p" | sort -u | sed "/${SKIP_TAG}/d")
+    | sed -n "s| ||g;s|library/||g;s|:Tags:|:|p;s|:SharedTags:|:|p" | sort -u | sed "/${SKIP_TAG}/d")
     if [ -s ${SCRIPTS_PATH}/images.list ];then
         LIST="$(cat ${SCRIPTS_PATH}/images.list | sed 's|^|\^|g' | tr '\n' '|' | sed 's/|$//')"
         IMAGES=$(echo -e ${IMAGES} | tr ' ' '\n' | grep -E "${LIST}")
