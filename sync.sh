@@ -8,7 +8,7 @@ NORMAL_COL="\\033[0;39m"
 
 REGISTRY_DOMAIN=$1
 : ${REGISTRY_DOMAIN:="registry.local"}
-REGISTRY_LIBRARY="${REGISTRY_DOMAIN}/library"
+REGISTRY_LIBRARY="${REGISTRY_DOMAIN}/docker-hub"
 REPO_PATH=$2
 : ${REPO_PATH:=${PWD}}
 
@@ -32,7 +32,7 @@ diff_images() {
     : ${LAST_TAG:=$(git log upstream/master --format='%H' | tail -n1)}
     IMAGES=$(git diff --name-only --ignore-space-at-eol --ignore-space-change \
     --diff-filter=AM ${LAST_TAG} ${CURRENT_COMMIT} library | xargs -L1 -I {} sed "s|^|{}:|g" {} \
-    | sed -n "s| ||g;s|library/||g;s|:Tags:|:|p;s|:SharedTags:|:|p" | sort -u | sed "/${SKIP_TAG}/d")
+    # | sed -n "s| ||g;s|library/||g;s|:Tags:|:|p;s|:SharedTags:|:|p" | sort -u | sed "/${SKIP_TAG}/d")
     if [ -s ${SCRIPTS_PATH}/images.list ];then
         LIST="$(cat ${SCRIPTS_PATH}/images.list | sed 's|^|\^|g' | tr '\n' '|' | sed 's/|$//')"
         IMAGES=$(echo -e ${IMAGES} | tr ' ' '\n' | grep -E "${LIST}")
