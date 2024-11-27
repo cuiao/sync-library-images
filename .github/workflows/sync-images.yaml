@@ -39,6 +39,7 @@ jobs:
         run: |
           echo ${REGISTRY_HOSTS} | sudo tee -a /etc/hosts
           sudo skopeo login ${REGISTRY_DOMAIN} -u ${REGISTRY_USER} -p ${REGISTRY_PASSWORD} --tls-verify=false
+          pwd
           sudo bash ${GITHUB_WORKSPACE}/tools/sync.sh ${REGISTRY_DOMAIN} ${GITHUB_WORKSPACE}/official-images
       # for debug action runner
       #- name: Setup tmate session
