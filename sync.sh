@@ -87,7 +87,7 @@ gen_repo_tag() {
 }
 
 
-IMAGES=${cat ${GITHUB_WORKSPACE}/tools/imagestogo.list}
+IMAGES=$(cat ${SCRIPTS_PATH}/imagestogo.list)
 echo "*****IMAGES TO GO*****"
 echo ${IMAGES}
 
