@@ -37,7 +37,11 @@ diff_images() {
         LIST="$(cat ${SCRIPTS_PATH}/images.list | sed 's|^|\^|g' | tr '\n' '|' | sed 's/|$//')"
         IMAGES=$(echo -e ${IMAGES} | tr ' ' '\n' | grep -E "${LIST}")
     fi
+    echo ${IMAGES}
+    echo ${LIST}
+    cat ${SCRIPTS_PATH}/images.list
 }
+
 
 skopeo_copy() {
     if skopeo copy --insecure-policy --src-tls-verify=false --dest-tls-verify=false -q docker://$1 docker://$2; then
@@ -63,7 +67,7 @@ sync_images() {
 
         if skopeo_copy docker.io/${name}:${tags} ${REGISTRY_LIBRARY}/${name}:${tags}; then
             for tag in $(echo ${image} | cut -d ':' -f2 | tr ',' '\n'); do
-                skopeo_copy ${REGISTRY_LIBRARY}/${name}:${tags} ${REGISTRY_LIBRARY}${name}:${tag}
+                skopeo_copy ${REGISTRY_LIBRARY}/${name}:${tags} ${REGISTRY_LIBRARY}/${name}:${tag}
             done
         fi
     done
