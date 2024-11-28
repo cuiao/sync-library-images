@@ -86,6 +86,11 @@ gen_repo_tag() {
     fi
 }
 
-diff_images
+
+IMAGES=${cat ${GITHUB_WORKSPACE}/tools/imagestogo.list}
+echo "*****IMAGES TO GO*****"
+echo ${IMAGES}
+
+# diff_images
 sync_images
 # gen_repo_tag
