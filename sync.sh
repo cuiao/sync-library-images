@@ -41,7 +41,9 @@ diff_images() {
         IMAGES=$(echo -e ${IMAGES} | tr ' ' '\n' | grep -E "${LIST}")
     fi
 
+    echo "*****IMAGES*****"
     echo ${IMAGES}
+    echo "*****LIST*****"
     echo ${LIST}
 }
 
