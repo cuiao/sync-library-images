@@ -28,11 +28,14 @@ diff_images() {
     git fetch --tag
     git fetch --all
     CURRENT_COMMIT=$(git log -1 upstream/master --format='%H')
-    LAST_TAG=$(git tag -l | egrep --only-matching -E '^([[:digit:]]{12})' | sort -nr | head -n1)
-    : ${LAST_TAG:=$(git log upstream/master --format='%H' | tail -n1)}
-    IMAGES=$(git diff --name-only --ignore-space-at-eol --ignore-space-change \
-    --diff-filter=AM ${LAST_TAG} ${CURRENT_COMMIT} library | xargs -L1 -I {} sed "s|^|{}:|g" {} \
-    | sed -n "s| ||g;s|library/||g;s|:Tags:|:|p;s|:SharedTags:|:|p" | sort -u | sed "/${SKIP_TAG}/d")
+    # LAST_TAG=$(git tag -l | egrep --only-matching -E '^([[:digit:]]{12})' | sort -nr | head -n1)
+    # : ${LAST_TAG:=$(git log upstream/master --format='%H' | tail -n1)}
+    # IMAGES=$(git diff --name-only --ignore-space-at-eol --ignore-space-change \
+    # --diff-filter=AM ${LAST_TAG} ${CURRENT_COMMIT} library | xargs -L1 -I {} sed "s|^|{}:|g" {} \
+    # | sed -n "s| ||g;s|library/||g;s|:Tags:|:|p;s|:SharedTags:|:|p" | sort -u | sed "/${SKIP_TAG}/d")
+
+    IMAGES=$(grep -Er "^Tags:|^SharedTags:" library | sed 's|library/||g;s|:Tags||g;s|:SharedTags||g;s| ||g')
+
     if [ -s ${SCRIPTS_PATH}/images.list ];then
         LIST="$(cat ${SCRIPTS_PATH}/images.list | sed 's|^|\^|g' | tr '\n' '|' | sed 's/|$//')"
         IMAGES=$(echo -e ${IMAGES} | tr ' ' '\n' | grep -E "${LIST}")
@@ -83,4 +86,4 @@ gen_repo_tag() {
 
 diff_images
 sync_images
-gen_repo_tag
+# gen_repo_tag
