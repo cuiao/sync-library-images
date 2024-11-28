@@ -87,7 +87,7 @@ gen_repo_tag() {
 }
 
 
-IMAGES=$(cat ${SCRIPTS_PATH}/imagestogo.list)
+IMAGES=$(cat ${SCRIPTS_PATH}/imagestogo.list | tr ' ' '\n')
 echo "*****IMAGES TO GO*****"
 echo ${IMAGES}
 
