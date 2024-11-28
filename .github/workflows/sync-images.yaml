@@ -19,7 +19,7 @@ jobs:
       - name: Checkout official-images repo
         uses: actions/checkout@v2
         with:
-          # token: ${{ secrets.TOKEN_GITHUB }}
+          token: ${{ secrets.TOKEN_GITHUB }}
           fetch-depth: 0
           repository: ${{ github.repository_owner }}/official-images
           path: official-images
