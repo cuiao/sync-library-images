@@ -37,10 +37,11 @@ jobs:
           REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
           REGISTRY_HOSTS: ${{ secrets.REGISTRY_HOSTS }}
         run: |
-          echo 'deb http://download.opensuse.org/repositories/home:/alvistack/xUbuntu_22.04/ /' | sudo tee /etc/apt/sources.list.d/home:alvistack.list
-          curl -fsSL https://download.opensuse.org/repositories/home:alvistack/xUbuntu_22.04/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_alvistack.gpg > /dev/null
-          sudo apt update && sudo apt install skopeo
-          skopeo --version
+          # echo 'deb http://download.opensuse.org/repositories/home:/alvistack/xUbuntu_22.04/ /' | sudo tee /etc/apt/sources.list.d/home:alvistack.list
+          # curl -fsSL https://download.opensuse.org/repositories/home:alvistack/xUbuntu_22.04/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_alvistack.gpg > /dev/null
+          # sudo apt update && sudo apt install skopeo
+          # skopeo --version
+          podman run docker://quay.io/skopeo/stable:latest --help
           echo ${REGISTRY_HOSTS} | sudo tee -a /etc/hosts
           sudo skopeo login ${REGISTRY_DOMAIN} -u ${REGISTRY_USER} -p ${REGISTRY_PASSWORD} --tls-verify=false
           sudo bash ${GITHUB_WORKSPACE}/tools/sync.sh ${REGISTRY_DOMAIN} ${GITHUB_WORKSPACE}/official-images
