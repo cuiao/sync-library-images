@@ -9,7 +9,7 @@ on:
 
 jobs:
   sync-images:
-    runs-on: ubuntu-22.04
+    runs-on: alpine-latest
     steps:
       - name: Clone repository
         uses: actions/checkout@v2
@@ -37,7 +37,7 @@ jobs:
           REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
           REGISTRY_HOSTS: ${{ secrets.REGISTRY_HOSTS }}
         run: |
-          sudo apt update && sudo apt install skopeo
+          sudo apk add skopeo
           skopeo --version
           echo ${REGISTRY_HOSTS} | sudo tee -a /etc/hosts
           sudo skopeo login ${REGISTRY_DOMAIN} -u ${REGISTRY_USER} -p ${REGISTRY_PASSWORD} --tls-verify=false
