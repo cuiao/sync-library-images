@@ -1,1 +1,1 @@
-gradle:6.9.4-jdk17-alpine,6.9-jdk17-alpine,6-jdk17-alpine,6.9.4-jdk-alpine,6.9-jdk-alpine,6-jdk-alpine,6.9.4-alpine,6.9-alpine,6-alpine swipl:latest,9.3.14 swipl:stable,9.2.8
+mongo:8.0.4-rc0-windowsservercore-ltsc2022,8.0-rc-windowsservercore-ltsc2022
