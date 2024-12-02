@@ -37,7 +37,7 @@ jobs:
           REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
           REGISTRY_HOSTS: ${{ secrets.REGISTRY_HOSTS }}
         run: |
-          sudo apt-get upgrade -y
+          sudo apt update && sudo apt install skopeo
           skopeo --version
           echo ${REGISTRY_HOSTS} | sudo tee -a /etc/hosts
           sudo skopeo login ${REGISTRY_DOMAIN} -u ${REGISTRY_USER} -p ${REGISTRY_PASSWORD} --tls-verify=false
