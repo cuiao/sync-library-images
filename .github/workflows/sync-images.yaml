@@ -30,9 +30,7 @@ jobs:
           cd ${GITHUB_WORKSPACE}/official-images && git config user.email github-actions@github.com
 
       - name: Set Up skopeo
-        uses: warjiang/setup-skopeo@latest
-        with:
-          version: latest
+        uses: warjiang/setup-skopeo
 
       - name: Sync images to registry
         shell: bash
