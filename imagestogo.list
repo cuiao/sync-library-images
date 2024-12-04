@@ -1,1 +1,1 @@
-jetbrains/teamcity-server:2024.07.3-linux-arm64 jupyterhub/jupyterhub:main jupyterhub/jupyterhub:latest jgraph/drawio:latest,24.7.17 grafana/grafana:main-ubuntu grafana/grafana:main
+jupyterhub/jupyterhub:main jupyterhub/jupyterhub:latest jgraph/drawio:latest,24.7.17

@@ -29,6 +29,11 @@ jobs:
           cd ${GITHUB_WORKSPACE}/official-images && git config user.name github-actions
           cd ${GITHUB_WORKSPACE}/official-images && git config user.email github-actions@github.com
 
+      - name: Set Up skopeo
+        uses: warjiang/setup-skopeo@latest
+        with:
+          version: latest
+
       - name: Sync images to registry
         shell: bash
         env:
@@ -40,7 +45,7 @@ jobs:
           # echo 'deb http://download.opensuse.org/repositories/home:/alvistack/xUbuntu_22.04/ /' | sudo tee /etc/apt/sources.list.d/home:alvistack.list
           # curl -fsSL https://download.opensuse.org/repositories/home:alvistack/xUbuntu_22.04/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_alvistack.gpg > /dev/null
           # sudo apt update && sudo apt install skopeo
-          # skopeo --version
+          skopeo --version
           # podman run docker://quay.io/skopeo/stable:latest --help
           echo ${REGISTRY_HOSTS} | sudo tee -a /etc/hosts
           sudo skopeo login ${REGISTRY_DOMAIN} -u ${REGISTRY_USER} -p ${REGISTRY_PASSWORD} --tls-verify=false
