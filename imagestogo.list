@@ -1,1 +1,1 @@
-jupyterhub/jupyterhub:main jupyterhub/jupyterhub:latest jgraph/drawio:latest,24.7.17
+aquasec/trivy:latest,0.58.0 aquasec/trivy:latest-s390x,0.58.0-s390x aquasec/trivy:latest-arm64,0.58.0-arm64 aquasec/trivy:latest-amd64,0.58.0-amd64 aquasec/trivy:latest-ppc64le,0.58.0-ppc64le
