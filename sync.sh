@@ -8,7 +8,7 @@ NORMAL_COL="\\033[0;39m"
 
 REGISTRY_DOMAIN=$1
 : ${REGISTRY_DOMAIN:="registry.local"}
-REGISTRY_LIBRARY="${REGISTRY_DOMAIN}/gitlab"
+REGISTRY_LIBRARY="${REGISTRY_DOMAIN}/docker-hub"
 REPO_PATH=$2
 : ${REPO_PATH:=${PWD}}
 
@@ -69,7 +69,7 @@ sync_images() {
         name="$(echo ${image} | cut -d ':' -f1)"
         tags="$(echo ${image} | cut -d ':' -f2 | cut -d ',' -f1)"
 
-        if skopeo_copy gitlab/${name}:${tags} ${REGISTRY_LIBRARY}/${name}:${tags}; then
+        if skopeo_copy docker.io/${name}:${tags} ${REGISTRY_LIBRARY}/${name}:${tags}; then
             for tag in $(echo ${image} | cut -d ':' -f2 | tr ',' '\n'); do
                 skopeo_copy ${REGISTRY_LIBRARY}/${name}:${tags} ${REGISTRY_LIBRARY}/${name}:${tag}
             done
