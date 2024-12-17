@@ -69,7 +69,7 @@ sync_images() {
         name="$(echo ${image} | cut -d ':' -f1)"
         tags="$(echo ${image} | cut -d ':' -f2 | cut -d ',' -f1)"
 
-        if skopeo_copy docker.io/${name}:${tags} ${REGISTRY_LIBRARY}/${name}:${tags}; then
+        if skopeo_copy ghcr.io/${name}:${tags} ${REGISTRY_LIBRARY}/${name}:${tags}; then
             for tag in $(echo ${image} | cut -d ':' -f2 | tr ',' '\n'); do
                 skopeo_copy ${REGISTRY_LIBRARY}/${name}:${tags} ${REGISTRY_LIBRARY}/${name}:${tag}
             done
